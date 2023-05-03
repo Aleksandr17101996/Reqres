@@ -147,3 +147,11 @@ class TestLibrary:
             assert status_code == 400, "Статус кода не соответсвует ожидаемому"
             assert body["error"] == "Missing password", "Тело ответа не соответсвует"
 
+    class TestDelayedResponse(Library):
+        """Класс содержит позитивые проверку методов, ответ приходит с задержкой"""
+
+        def test_get_delayed_response(self):
+            seconds = 3
+            status_code, body = self.get_delayed_response(seconds)
+            assert status_code == 200, "Статус кода не соответсвует ожидаемому"
+            assert "data" in body, "Тело ответа не соответсвует"
