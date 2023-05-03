@@ -6,7 +6,7 @@ from data.generator import generated_person
 
 class TestLibrary:
     class TestGetReq(Library):
-        """Класс содержит позитивные и негативные проверки get методов """
+        """Класс содержит позитивные и негативные проверки методов получения информации о пользователях"""
 
         def test_get_list_users(self):
             """Позитивная проверка предоставления информации о пользователях
@@ -61,7 +61,7 @@ class TestLibrary:
             assert body == {}, "Тело ответа не пустое"
 
     class TestChangeMethods(Library):
-        """Класс содержит позитивные и негативные проверки post/put/patch/delete методов """
+        """Класс содержит позитивные проверки методов добавления, изменения и удаления информации о пользователях """
 
         def test_post_create(self):
             """Позитивная проверка отправки данных о пользователе сгенерированных случайным образом,
@@ -108,4 +108,28 @@ class TestLibrary:
             user_id = random.randint(1, 12)
             status_code = self.delete_user(str(user_id))
             assert status_code == 204, "Статус кода не соответсвует ожидаемому"
+
+    class TestRegister(Library):
+        """Класс содержит позитивные и негативные проверки методов регистрации и авторизации """
+
+        def test_post_register(self):
+            """Позитивная проверка возможности регистрации пользователя"""
+
+            email = "eve.holt@reqres.in"
+            password = "pistol"
+            status_code, body = self.post_register(email, password)
+            assert status_code == 200, "Статус кода не соответсвует ожидаемому"
+            assert int(body["id"]) > 0, "id не валиден"
+            assert "token" in body, "Токен отсутсвует в ответе"
+
+        def test_post_login(self):
+            """Позитивная проверка возможности авторизации пользователя"""
+
+            email = "eve.holt@reqres.in"
+            password = "cityslicka"
+            status_code, body = self.post_login(email, password)
+            assert status_code == 200, "Статус кода не соответсвует ожидаемому"
+            assert "token" in body, "Токен отсутсвует в ответе"
+
+
 
