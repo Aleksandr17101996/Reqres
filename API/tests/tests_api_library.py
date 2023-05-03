@@ -57,3 +57,16 @@ class TestLibrary:
             status_code, body = self.get_single_resource(str(user_id))
             assert status_code == 404, "Статус кода не соответсвуе ожидаемому"
             assert body == {}, "Тело ответа не пустое"
+
+    class TestChangeMethods(Library):
+        """Класс содержит позитивные и негативные проверки post/put/patch/delete методов """
+
+        def test_post_create(self):
+            name = "fdgdgf"
+            job = "dgdfg"
+            status_code, body = self.post_create(name, job)
+            assert status_code == 201, "Статус кода не соответсвуе ожидаемому"
+            assert body["name"] == name
+            assert body["job"] == job
+            assert int(body["id"]) > 0
+
