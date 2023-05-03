@@ -23,6 +23,13 @@ class Requests(BasePage):
     def check_result(self):
         """Метод находит и возвращает тело ответа взятое с главной страницы сайта"""
 
-        body = self.element_is_present(self.locators.BODY_RESPONSE).text
+        body = self.element_is_visible(self.locators.BODY_RESPONSE).text
         return json.loads(body)
+
+    def click_get_single_user(self):
+        """Метод кликает на кнопку Get single user"""
+
+        button = self.element_is_visible(self.locators.GET_SINGLE_USER)
+        self.go_to_element(button)
+        button.click()
 

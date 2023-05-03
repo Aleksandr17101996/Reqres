@@ -17,3 +17,17 @@ class TestRequests:
             body = requests_page.check_result()
             assert len(body['data']) == 6, "Не верное колличество пользователей на странице"
             assert status_code == 200, "Статус кода не соответсвует"
+
+        def test_click_get_single_user(self, driver):
+            """Проверяем что при нажатии на отправку запроса о полчении информации о пользователе,
+               возвращается статус кода 200 и отображается информация о 6 пользователях """
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_get_single_user()
+            status_code = page.check_status_code()
+            body = page.check_result()
+            assert status_code == 200, "Статус кода не соответсвует ожидаемому"
+            assert "data" in body
+
+
