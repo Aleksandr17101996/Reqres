@@ -131,5 +131,19 @@ class TestLibrary:
             assert status_code == 200, "Статус кода не соответсвует ожидаемому"
             assert "token" in body, "Токен отсутсвует в ответе"
 
+        def test_post_register_neg(self):
+            """Негативная проверка регистрации пользователя без пароля"""
 
+            email = "eve.holt@reqres.in"
+            status_code, body = self.post_register(email, None)
+            assert status_code == 400, "Статус кода не соответсвует ожидаемому"
+            assert body['error'] == "Missing password", "Тело ответа не соответсвует"
+
+        def test_post_login_neg(self):
+            """Негативная проверка авторизации пользователя без пароля"""
+
+            email = "eve.holt@reqres.in"
+            status_code, body = self.post_login(email, None)
+            assert status_code == 400, "Статус кода не соответсвует ожидаемому"
+            assert body["error"] == "Missing password", "Тело ответа не соответсвует"
 
