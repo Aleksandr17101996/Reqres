@@ -11,5 +11,6 @@ def generated_person():
     yield Person(
         password=random.randint(100, 9999),
         email=faker_en.email(),
-        first_name=faker_en.first_name()
+        first_name=faker_en.first_name(),
+        job=faker_en.job(),
     )
