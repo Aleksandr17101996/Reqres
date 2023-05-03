@@ -46,8 +46,8 @@ class Library:
         return status_code, body
 
     def post_create(self, name, job):
-        """Метод отправляет на сервер данные о имене и работе пользователея возвращает присвоенный
-        id и дату операции"""
+        """Метод отправляет на сервер данные о имене и работе пользователея возвращает статус код,
+         присвоенный id и дату операции"""
 
         data = {
             "name": name,
@@ -59,7 +59,8 @@ class Library:
         return status_code, body
 
     def put_update(self, name, job, user_id):
-        """Тест"""
+        """Метод обнавляет на сервере данные о имене и работе пользователея найденного по id
+           возвращает статус код и обновленные данныйе с датой операции"""
 
         data = {
             "name": name,
@@ -71,7 +72,8 @@ class Library:
         return status_code, body
 
     def patch_update(self, name, job, user_id):
-        """Тест"""
+        """Метод обнавляет на сервере данные о имене и работе пользователея найденного по id
+           возвращает статус код и обновленные данныйе с датой операции"""
 
         data = {
             "name": name,
@@ -83,14 +85,16 @@ class Library:
         return status_code, body
 
     def delete_user(self, user_id):
-        """Тест"""
+        """Метод удаляет с сервера данные о пользователе найденного по id
+           возвращает статус код"""
 
         r = requests.delete(self.url + self.v1 + "users/" + user_id)
         status_code = r.status_code
         return status_code
 
     def post_register(self, email, password):
-        """Тест"""
+        """Метод отправляет пост запрос на регистрацию пользователя, принимает email и пароль,
+           возвращает статус код, id и токен """
 
         data = {
             "email": email,
@@ -102,7 +106,8 @@ class Library:
         return status_code, body
 
     def post_login(self, email, password):
-        """Тест"""
+        """Метод отправляет пост запрос на сервер с данными о пользователе, возвращает
+           статус код и токен"""
 
         data = {
             "email": email,
@@ -114,7 +119,8 @@ class Library:
         return status_code, body
 
     def get_delayed_response(self, seconds):
-        """Тест"""
+        """Метод отправляет get запрос на сервер, возвращает статус код и информацию
+           о пользователях с задержкой указанной в секундах"""
 
         params = {"delay": seconds}
         r = requests.get(self.url + self.v1 + "users", params=params)
