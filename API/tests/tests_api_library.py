@@ -1,11 +1,13 @@
 import random
 
 from API.api_library import Library
+from data.generator import generated_person
 
 
 class TestLibrary:
     class TestGetReq(Library):
         """Класс содержит позитивные и негативные проверки get методов """
+
         def test_get_list_users(self):
             """Позитивная проверка предоставления информации о пользователях
                на случайно выбранной странице"""
@@ -62,11 +64,30 @@ class TestLibrary:
         """Класс содержит позитивные и негативные проверки post/put/patch/delete методов """
 
         def test_post_create(self):
-            name = "fdgdgf"
-            job = "dgdfg"
+            """Позитивная проверка отправки данных о пользователе сгенерированных случайным образом,
+               получения вадидного id в ответе"""
+
+            person = next(generated_person())
+            name = person.first_name
+            job = person.job
             status_code, body = self.post_create(name, job)
             assert status_code == 201, "Статус кода не соответсвуе ожидаемому"
             assert body["name"] == name
             assert body["job"] == job
             assert int(body["id"]) > 0
+
+        def test_put_update(self):
+            """Позитивная проверка отправки данных о пользователе сгенерированных случайным образом,
+               получения вадидного id в ответе"""
+
+            person = next(generated_person())
+            name = person.first_name
+            job = person.job
+            user_id = random.randint(1, 12)
+            status_code, body = self.put_update(name, job, str(user_id))
+            assert status_code == 200, "Статус кода не соответсвуе ожидаемому"
+            assert body["name"] == name, "Имя не изменено"
+            assert body["job"] == job, "Данные о работе не изменены"
+            assert "updatedAt" in body, "Отсутсвует время изменения"
+
 
