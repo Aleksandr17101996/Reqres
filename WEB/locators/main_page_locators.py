@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 
 
 class MainPageLocators:
+    """Класс содержит локаторы кнопок отправки образца запросов на главной странице сайта"""
+
     GET_LIST_USERS = (By.CSS_SELECTOR, 'li[data-id="users"]')
     GET_SINGLE_USER = (By.CSS_SELECTOR, 'li[data-id="users-single"]')
     GET_SINGLE_USER_NOT_FOUND = (By.CSS_SELECTOR, 'li[data-id="users-single-not-found"]')
