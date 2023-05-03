@@ -41,9 +41,19 @@ class TestLibrary:
             assert body["data"]["id"] == user_id, "Найден пользователь с несоответсвующем id"
 
         def test_get_list_users_neg(self):
-            """Негативная проверка предоставления информации о пользователях
-               на случайно выбранной несуществующей странице"""
-            number_page = 9999999999999999999999999999999999999
-            status_code, body = self.get_list_users(number_page)
-            print(body)
-            print(status_code)
+            """Негативная проверка предоставления информации о пользователе
+               выбранным случайным образом по несуществующему id"""
+
+            user_id = random.randint(13, 100)
+            status_code, body = self.get_single_user(user_id)
+            assert status_code == 404, "Статус кода не соответсвует"
+            assert body == {}, "Тело ответа не пустое"
+
+        def test_single_resource_neg(self):
+            """Негативная проверка предоставления информации о случайном пользователе
+               выбранным случайным образом по несущестующему id"""
+
+            user_id = random.randint(13, 100)
+            status_code, body = self.get_single_resource(str(user_id))
+            assert status_code == 404, "Статус кода не соответсвуе ожидаемому"
+            assert body == {}, "Тело ответа не пустое"
