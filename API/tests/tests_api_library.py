@@ -77,8 +77,7 @@ class TestLibrary:
             assert int(body["id"]) > 0
 
         def test_put_update(self):
-            """Позитивная проверка отправки данных о пользователе сгенерированных случайным образом,
-               получения вадидного id в ответе"""
+            """Позитивная проверка изменения методом put данных о пользователе найденного по id"""
 
             person = next(generated_person())
             name = person.first_name
@@ -91,3 +90,15 @@ class TestLibrary:
             assert "updatedAt" in body, "Отсутсвует время изменения"
 
 
+        def test_patch_update(self):
+            """Позитивная проверка изменения методом put данных о пользователе найденного по id"""
+
+            person = next(generated_person())
+            name = person.first_name
+            job = person.job
+            user_id = random.randint(1, 12)
+            status_code, body = self.patch_update(name, job, str(user_id))
+            assert status_code == 200, "Статус кода не соответсвуе ожидаемому"
+            assert body["name"] == name, "Имя не изменено"
+            assert body["job"] == job, "Данные о работе не изменены"
+            assert "updatedAt" in body, "Отсутсвует время изменения"
