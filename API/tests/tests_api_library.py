@@ -89,7 +89,6 @@ class TestLibrary:
             assert body["job"] == job, "Данные о работе не изменены"
             assert "updatedAt" in body, "Отсутсвует время изменения"
 
-
         def test_patch_update(self):
             """Позитивная проверка изменения методом put данных о пользователе найденного по id"""
 
@@ -102,3 +101,11 @@ class TestLibrary:
             assert body["name"] == name, "Имя не изменено"
             assert body["job"] == job, "Данные о работе не изменены"
             assert "updatedAt" in body, "Отсутсвует время изменения"
+
+        def test_delete(self):
+            """Позитивная проверка удаления данных о пользователе найденного по id"""
+
+            user_id = random.randint(1, 12)
+            status_code = self.delete_user(str(user_id))
+            assert status_code == 204, "Статус кода не соответсвует ожидаемому"
+
