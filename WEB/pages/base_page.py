@@ -13,5 +13,8 @@ class BasePage:
     def element_is_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
+    def element_is_present(self, locator, timeout=5):
+        return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
