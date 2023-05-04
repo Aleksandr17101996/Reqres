@@ -72,10 +72,19 @@ class Requests(BasePage):
         button = self.element_is_visible(self.locators.POST_CREATE)
         self.go_to_element(button)
         button.click()
+        time.sleep(1)
 
     def check_out_req(self):
         """Метод находит и возвращает тело запроса взятое с главной страницы сайта"""
 
         body = self.element_is_visible(self.locators.OUTPUT_REQUEST).text
         return json.loads(body)
+
+    def click_put_update(self):
+        """Метод кликает на кнопку put update"""
+
+        button = self.element_is_visible(self.locators.PUT_UPDATE)
+        self.go_to_element(button)
+        button.click()
+
 

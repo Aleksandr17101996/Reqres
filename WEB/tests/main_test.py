@@ -76,7 +76,7 @@ class TestRequests:
 
         def test_post_create(self, driver):
             """Проверяем что при нажатии на отправку post запроса с данными о пользователе,
-                возвращается статус кода 200, передаваемые данные в запросе присутсвуют в ответе
+                возвращается статус кода 201, передаваемые данные в запросе присутсвуют в ответе
                 присвоен валидный id, так же указанно время и дата операции"""
 
             page = Requests(driver, 'https://reqres.in/')
@@ -85,8 +85,23 @@ class TestRequests:
             request = page.check_out_req()
             status_code = page.check_status_code()
             response = page.check_result()
-            assert status_code == 200, "Статус кода не соответсвует"
+            assert status_code == 201, "Статус кода не соответсвует"
             assert request["name"] == response["name"], "Передоваемое имя в запросе отстутсвует в ответе"
             assert request["job"] == response["job"], "Сведенья о работе  в ответе не соответсвуют"
             assert int(response['id']) > 0, "id невалидный"
             assert 'createdAt' in response, "Отсутсвует дата выполнения операции"
+
+        def test_put_update(self, driver):
+            """Проверяем что при нажатии на отправку put запроса на обнавление данных о пользователе,
+               возвращается статус кода 200, передаваемые данные в запросе присутсвуют в ответе
+               так же указанно время и дата операции"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_put_update()
+            request = page.check_out_req()
+            status_code = page.check_status_code()
+            response = page.check_result()
+            assert status_code == 200, "Статус кода не соответсвует"
+            assert request["name"] == response["name"], "Передоваемое имя в запросе отстутсвует в ответе"
+            assert request["job"] == response["job"], "Сведенья о работе  в ответе не соответсвуют"
