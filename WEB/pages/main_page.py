@@ -114,3 +114,11 @@ class Requests(BasePage):
         button = self.element_is_visible(self.locators.POST_REGISTER_UNSUCCESSFUL)
         self.go_to_element(button)
         button.click()
+
+    def click_login_successful(self):
+        """Метод кликает на кнопку post login successful"""
+
+        button = self.element_is_visible(self.locators.POST_LOGIN_SUCCESSFUL)
+        self.go_to_element(button)
+        button.click()
+
