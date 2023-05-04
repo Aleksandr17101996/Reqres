@@ -100,3 +100,11 @@ class Requests(BasePage):
         button = self.element_is_visible(self.locators.DELETE)
         self.go_to_element(button)
         button.click()
+
+    def click_post_register_successful(self):
+        """Метод кликает на кнопку post register successful"""
+
+        button = self.element_is_visible(self.locators.POST_REGISTER_SUCCESSFUL)
+        self.go_to_element(button)
+        button.click()
+

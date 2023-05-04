@@ -124,9 +124,24 @@ class TestRequests:
             assert "updatedAt" in response, "Нет данных о дате и времени изменения"
 
         def test_delete(self, driver):
+            """Проверяем что при нажатии на отправку delete запроса на удаление данных о пользователе,
+               возвращается статус кода 204"""
+
             page = Requests(driver, 'https://reqres.in/')
             page.open()
             page.click_delete()
             status_code = page.check_status_code_bud()
             assert status_code == 204, "Статус кода не соответсвует ожидаемому"
 
+        def test_post_register_successful(self, driver):
+            """Проверяем что при нажатии на отправку post запроса на регистрацию пользователе,
+               возвращается статус кода 200, присвоен валидный id и в ответе содержится токен"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_post_register_successful()
+            status_code = page.check_status_code()
+            response = page.check_result()
+            assert status_code == 200, "Статус кода не соответсвует"
+            assert int(response["id"]) > 0, "id не валиден"
+            assert "token" in response, "Токен отсутсвует в ответе"
