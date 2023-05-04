@@ -145,3 +145,15 @@ class TestRequests:
             assert status_code == 200, "Статус кода не соответсвует"
             assert int(response["id"]) > 0, "id не валиден"
             assert "token" in response, "Токен отсутсвует в ответе"
+
+        def test_post_register_unsuccessful(self, driver):
+            """Проверяем что при нажатии на отправку post запроса на регистрацию пользователе,ез передачи пароля
+               возвращается статус кода 400, в ответе содержится описание ошибки"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_post_register_unsuccessful()
+            status_code = page.check_status_code_bud()
+            response = page.check_result()
+            assert status_code == 400, "Статус кода не соответсвует"
+            assert response["error"] == "Missing password", "Ошибка не обрабатывается системой"
