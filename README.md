@@ -8,4 +8,5 @@
     pip install -r requirements.txt
 
 #### 3. Описание проекта:
-    в дирркетории API
+    Проект автоматизации тестирования сайта https://reqres.in/
+    
