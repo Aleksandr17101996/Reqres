@@ -122,3 +122,11 @@ class TestRequests:
             assert request["name"] == response["name"], "Передоваемое имя в запросе отстутсвует в ответе"
             assert request["job"] == response["job"], "Сведенья о работе  в ответе не соответсвуют"
             assert "updatedAt" in response, "Нет данных о дате и времени изменения"
+
+        def test_delete(self, driver):
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_delete()
+            status_code = page.check_status_code_bud()
+            assert status_code == 204, "Статус кода не соответсвует ожидаемому"
+

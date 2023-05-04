@@ -93,3 +93,10 @@ class Requests(BasePage):
         button = self.element_is_visible(self.locators.PATCH_UPDATE)
         self.go_to_element(button)
         button.click()
+
+    def click_delete(self):
+        """Метод кликает на кнопку delete"""
+
+        button = self.element_is_visible(self.locators.DELETE)
+        self.go_to_element(button)
+        button.click()
