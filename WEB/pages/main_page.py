@@ -122,3 +122,9 @@ class Requests(BasePage):
         self.go_to_element(button)
         button.click()
 
+    def click_login_unsuccessful(self):
+        """Метод кликает на кнопку post login unsuccessful"""
+
+        button = self.element_is_visible(self.locators.POST_LOGIN_UNSUCCESSFUL)
+        self.go_to_element(button)
+        button.click()
