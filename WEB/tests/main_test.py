@@ -169,3 +169,16 @@ class TestRequests:
             response = page.check_result()
             assert status_code == 200, "Статус кода не соответсвует"
             assert "token" in response
+
+        def test_post_login_unsuccessful(self, driver):
+            """Проверяем что при нажатии на отправку post запроса на авторизацию пользователе,без передачи пароля
+               возвращается статус кода 400, в теле ответа возвращается описание ошибки"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_login_unsuccessful()
+            status_code = page.check_status_code_bud()
+            response = page.check_result()
+            assert status_code == 400, "Статус кода не соответсвует"
+            assert response["error"] == "Missing password", "Ошибка не обрабатывается системой"
+
