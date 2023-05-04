@@ -128,3 +128,13 @@ class Requests(BasePage):
         button = self.element_is_visible(self.locators.POST_LOGIN_UNSUCCESSFUL)
         self.go_to_element(button)
         button.click()
+
+    def click_get_delayed_response(self):
+        """Метод кликает на кнопку get delayed_response"""
+
+        button = self.element_is_visible(self.locators.GET_DELAYED_RESPONSE)
+        self.go_to_element(button)
+        button.click()
+
+
+
