@@ -60,4 +60,22 @@ class Requests(BasePage):
         self.go_to_element(button)
         button.click()
 
+    def click_get_single_res_not_fo(self):
+        """Метод кликает на кнопку Get single resource not found"""
+        button = self.element_is_visible(self.locators.GET_SINGLE_RES_NOT_FOUND)
+        self.go_to_element(button)
+        button.click()
+
+    def click_post_create(self):
+        """Метод кликает на кнопку post create"""
+
+        button = self.element_is_visible(self.locators.POST_CREATE)
+        self.go_to_element(button)
+        button.click()
+
+    def check_out_req(self):
+        """Метод находит и возвращает тело запроса взятое с главной страницы сайта"""
+
+        body = self.element_is_visible(self.locators.OUTPUT_REQUEST).text
+        return json.loads(body)
 
