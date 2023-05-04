@@ -108,3 +108,9 @@ class Requests(BasePage):
         self.go_to_element(button)
         button.click()
 
+    def click_post_register_unsuccessful(self):
+        """Метод кликает на кнопку post register unsuccessful"""
+
+        button = self.element_is_visible(self.locators.POST_REGISTER_UNSUCCESSFUL)
+        self.go_to_element(button)
+        button.click()
