@@ -87,4 +87,9 @@ class Requests(BasePage):
         self.go_to_element(button)
         button.click()
 
+    def click_patch_update(self):
+        """Метод кликает на кнопку path update"""
 
+        button = self.element_is_visible(self.locators.PATCH_UPDATE)
+        self.go_to_element(button)
+        button.click()

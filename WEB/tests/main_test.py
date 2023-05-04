@@ -105,3 +105,20 @@ class TestRequests:
             assert status_code == 200, "Статус кода не соответсвует"
             assert request["name"] == response["name"], "Передоваемое имя в запросе отстутсвует в ответе"
             assert request["job"] == response["job"], "Сведенья о работе  в ответе не соответсвуют"
+            assert "updatedAt" in response, "Нет данных о дате и времени изменения"
+
+        def test_patch_update(self, driver):
+            """Проверяем что при нажатии на отправку path запроса на обнавление данных о пользователе,
+               возвращается статус кода 200, передаваемые данные в запросе присутсвуют в ответе
+               так же указанно время и дата операции"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_patch_update()
+            request = page.check_out_req()
+            status_code = page.check_status_code()
+            response = page.check_result()
+            assert status_code == 200, "Статус кода не соответсвует"
+            assert request["name"] == response["name"], "Передоваемое имя в запросе отстутсвует в ответе"
+            assert request["job"] == response["job"], "Сведенья о работе  в ответе не соответсвуют"
+            assert "updatedAt" in response, "Нет данных о дате и времени изменения"
