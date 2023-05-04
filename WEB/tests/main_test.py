@@ -182,3 +182,14 @@ class TestRequests:
             assert status_code == 400, "Статус кода не соответсвует"
             assert response["error"] == "Missing password", "Ошибка не обрабатывается системой"
 
+        def test_get_delayed_response(self, driver):
+            """Проверяем что при нажатии на отправку post запроса на авторизацию пользователе,без передачи пароля
+               возвращается статус кода 400, в теле ответа возвращается описание ошибки"""
+
+            page = Requests(driver, 'https://reqres.in/')
+            page.open()
+            page.click_get_delayed_response()
+            response = page.check_result()
+            status_code = page.check_status_code()
+            assert status_code == 200, "Стаатус кода не соответсвует ожидаемому"
+            assert len(response["data"]) == 6, "Колличеество пользователей на странице не соотвентсвует"
